@@ -1,6 +1,6 @@
-# Libary
+# Libary (work in progress)
 
-## An 'The Odin Project' project
+## A 'The Odin Project' project
 
 Creating a libary, where user can add their own books.
 
