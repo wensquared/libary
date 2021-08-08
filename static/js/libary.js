@@ -22,9 +22,25 @@
 
 class Libary {
     constructor() {
-        let list = JSON.parse(window.localStorage.getItem('books'))
+        // let list = JSON.parse(window.localStorage.getItem('books'))
+
+        $('#dlg_addBook').click(function(event) {
+            event.preventDefault();
+
+            $('#addBook').dialog('open')
+            
+        });
+        
+        $('#addBook').dialog({
+            autoOpen: false,
+            width:400,
+            height:400,
+            modal: true, 
+         })
+
     }
 }
 $(document).ready(function() {
     console.log('Hello')
+    let libary = new Libary();
 })
