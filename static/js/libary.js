@@ -20,26 +20,46 @@
             get the data from table and save it local
  */
 
+
 class Libary {
     constructor() {
         // let list = JSON.parse(window.localStorage.getItem('books'))
+        var that = this;
 
         $('#dlg_addBook').click(function(event) {
             event.preventDefault();
 
-            $('#addBook').dialog('open')
+            $('#addBookForm').dialog('open')
             
         });
-        
-        $('#addBook').dialog({
+
+        $('#addBookForm').dialog({
             autoOpen: false,
             width:400,
             height:400,
             modal: true, 
-         })
+            buttons: [
+                {
+                    text: 'Add Book',
+                    click: function() {
+                        // console.log($('#form').submit());
+                        console.log('test')
+                        that.addBook();
+                        $(this).dialog('close')
+                    }
+                }
+            ]
+         });
+    }   
 
+    addBook() {
+        console.log('u submitted')
+        // let title = $('#read').val();
+        // console.log(title)
+        console.log($("form").serializeArray());
     }
 }
+
 $(document).ready(function() {
     console.log('Hello')
     let libary = new Libary();
