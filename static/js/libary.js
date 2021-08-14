@@ -74,6 +74,7 @@ class Libary {
         $('<td>').appendTo(tr).html(author);
         $('<td>').appendTo(tr).html(pages);
         let tdRead = $('<td>').appendTo(tr);
+        var that = this;
         $('<button>').appendTo(tdRead).html(read).click( function() {
             if(read == 'unread') {
                 read = 'read'
@@ -84,11 +85,13 @@ class Libary {
                 $(this).html(read)
             }
 
-            this.saveBook();
+            that.saveBook();
         });
-        
+        $('<button>').html('Delete').appendTo($('<td>').appendTo(tr)).click((event) =>{                        
+            $(event.target).closest('tr').remove();
+            this.saveBook();
+        }); 
 
-        
         this.saveBook();
         
         $('form').trigger('reset');
