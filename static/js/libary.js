@@ -56,7 +56,47 @@ class Libary {
         console.log('u submitted')
         // let title = $('#read').val();
         // console.log(title)
+        let read = 'unread';
         console.log($("form").serializeArray());
+
+        let title = $("form").serializeArray()[0]['value'];
+        let author = $("form").serializeArray()[1]['value'];
+        let pages = $("form").serializeArray()[2]['value'];
+
+        
+        if($("form").serializeArray().length == 4) {
+            read = 'read' //$("form").serializeArray()[3]['value'];
+            // console.log(typeof read) // string
+        }
+
+        let tr = $('<tr>').appendTo('#libary')
+        $('<td>').appendTo(tr).html(title);
+        $('<td>').appendTo(tr).html(author);
+        $('<td>').appendTo(tr).html(pages);
+        let tdRead = $('<td>').appendTo(tr);
+        $('<button>').appendTo(tdRead).html(read).click( function() {
+            if(read == 'unread') {
+                read = 'read'
+                $(this).html(read)
+            }
+            else {
+                read = 'unread';
+                $(this).html(read)
+            }
+
+            this.saveBook();
+        });
+        
+
+        
+        this.saveBook();
+        
+        $('form').trigger('reset');
+    }
+
+    saveBook() {
+        console.log('savebook fn')
+
     }
 }
 
