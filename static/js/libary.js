@@ -10,6 +10,14 @@ class Libary {
     constructor() {
         // let list = JSON.parse(window.localStorage.getItem('books'))
         var that = this;
+        let list = JSON.parse(window.localStorage.getItem('libary'));
+
+        if(list) {
+            list.forEach(element => {
+                this.addBook(element.title,element.author,element.pages,element.status);
+            });
+        }
+        
 
         $('#dlg_addBook').click(function(event) {
             event.preventDefault();
@@ -37,54 +45,106 @@ class Libary {
          });
     }   
 
-    addBook() {
+    addBook(title = '', author = '', pages = '', status = '') {
         console.log('u submitted')
         // let title = $('#read').val();
         // console.log(title)
-        let read = 'unread';
-        console.log($("form").serializeArray());
 
-        let title = $("form").serializeArray()[0]['value'];
-        let author = $("form").serializeArray()[1]['value'];
-        let pages = $("form").serializeArray()[2]['value'];
+        if(title && author && pages && status){
+            console.log('books avaiable to put on table')
+            let row = $('<tr>').appendTo($('#libary'));
 
-        
-        if($("form").serializeArray().length == 4) {
-            read = 'read' //$("form").serializeArray()[3]['value'];
-            // console.log(typeof read) // string
-        }
+            $('<td>').appendTo(row).html(title);
+            $('<td>').appendTo(row).html(author);
+            $('<td>').appendTo(row).html(pages);
+            let tdRead = $('<td>').appendTo(row);
+            var that = this;
+            $('<button>').appendTo(tdRead).html(status).click( function() {
+                if(status == 'unread') {
+                    status = 'read'
+                    $(this).html(status)
+                }
+                else {
+                    status = 'unread';
+                    $(this).html(status)
+                }
 
-        let tr = $('<tr>').appendTo('#libary')
-        $('<td>').appendTo(tr).html(title);
-        $('<td>').appendTo(tr).html(author);
-        $('<td>').appendTo(tr).html(pages);
-        let tdRead = $('<td>').appendTo(tr);
-        var that = this;
-        $('<button>').appendTo(tdRead).html(read).click( function() {
-            if(read == 'unread') {
-                read = 'read'
-                $(this).html(read)
-            }
-            else {
-                read = 'unread';
-                $(this).html(read)
-            }
-
-            that.saveBook();
-        });
-        $('<button>').html('Delete').appendTo($('<td>').appendTo(tr)).click((event) =>{                        
-            $(event.target).closest('tr').remove();
+                that.saveBook();
+            });
+            $('<button>').html('Delete').appendTo($('<td>').appendTo(row)).click((event) =>{                        
+                $(event.target).closest('tr').remove();
+                this.saveBook();
+            });              
+                                
             this.saveBook();
-        }); 
 
-        this.saveBook();
+        }
+        else {
+            console.log('adding new book')
+            status = 'unread';
+            console.log($("form").serializeArray());
+
+            title = $("form").serializeArray()[0]['value'];
+            author = $("form").serializeArray()[1]['value'];
+            pages = $("form").serializeArray()[2]['value'];
+
+            
+            if($("form").serializeArray().length == 4) {
+                status = 'read' //$("form").serializeArray()[3]['value'];
+                // console.log(typeof read) // string
+            }
+
+            let tr = $('<tr>').appendTo('#libary')
+            $('<td>').appendTo(tr).html(title);
+            $('<td>').appendTo(tr).html(author);
+            $('<td>').appendTo(tr).html(pages);
+            let tdRead = $('<td>').appendTo(tr);
+            var that = this;
+            $('<button>').appendTo(tdRead).html(status).click( function() {
+                if(status == 'unread') {
+                    status = 'read'
+                    $(this).html(status)
+                }
+                else {
+                    status = 'unread';
+                    $(this).html(status)
+                }
+
+                that.saveBook();
+            });
+            $('<button>').html('Delete').appendTo($('<td>').appendTo(tr)).click((event) =>{                        
+                $(event.target).closest('tr').remove();
+                this.saveBook();
+            }); 
+
+            this.saveBook();
+            
+            $('form').trigger('reset');
+        }
         
-        $('form').trigger('reset');
     }
 
     saveBook() {
         console.log('savebook fn')
+        let listOfBooks = [];
+        let pos = 0;
 
+        $('#libary tr').each(function() {
+            if(pos++ > 0) {
+                listOfBooks.push({
+                    title: $(this).children().eq(0).html(),
+                    author: $(this).children().eq(1).html(),
+                    pages: $(this).children().eq(2).html(),
+                    status: $(this).children().children().eq(0).html()
+                })
+                // console.log($(this).children().eq(0).html())
+                // console.log($(this).children().eq(1).html())
+                // console.log($(this).children().eq(2).html())
+                // console.log($(this).children().children().eq(0).html())
+            }
+            
+        })
+        window.localStorage.setItem('libary',JSON.stringify(listOfBooks));
     }
 }
 
