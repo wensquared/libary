@@ -1,14 +1,12 @@
 'use strict'
 /* 
     TODO:
-    - window.localStorage 
     - design
  */
 
-
 class Libary {
     constructor() {
-        // let list = JSON.parse(window.localStorage.getItem('books'))
+        
         var that = this;
         let list = JSON.parse(window.localStorage.getItem('libary'));
 
@@ -35,10 +33,9 @@ class Libary {
                 {
                     text: 'Add Book',
                     click: function() {
-                        // console.log($('#form').submit());
                         console.log('test')
                         that.addBook();
-                        $(this).dialog('close')
+                        $(this).dialog('close');
                     }
                 }
             ]
@@ -90,7 +87,8 @@ class Libary {
 
             
             if($("form").serializeArray().length == 4) {
-                status = 'read' //$("form").serializeArray()[3]['value'];
+                status = 'read' 
+                //$("form").serializeArray()[3]['value'];
                 // console.log(typeof read) // string
             }
 
@@ -121,7 +119,6 @@ class Libary {
             
             $('form').trigger('reset');
         }
-        
     }
 
     saveBook() {
@@ -136,19 +133,13 @@ class Libary {
                     author: $(this).children().eq(1).html(),
                     pages: $(this).children().eq(2).html(),
                     status: $(this).children().children().eq(0).html()
-                })
-                // console.log($(this).children().eq(0).html())
-                // console.log($(this).children().eq(1).html())
-                // console.log($(this).children().eq(2).html())
-                // console.log($(this).children().children().eq(0).html())
+                });
             }
-            
-        })
+        });
         window.localStorage.setItem('libary',JSON.stringify(listOfBooks));
     }
 }
 
 $(document).ready(function() {
-    console.log('Hello')
     let libary = new Libary();
-})
+});
