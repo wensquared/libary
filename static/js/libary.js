@@ -16,7 +16,6 @@ class Libary {
             });
         }
         
-
         $('#dlg_addBook').click(function(event) {
             event.preventDefault();
 
@@ -38,7 +37,7 @@ class Libary {
                     }
                 }
             ]
-         });
+        });
     }   
 
     addBook(title = '', author = '', pages = '', status = '') {
@@ -54,12 +53,12 @@ class Libary {
             var that = this;
             $('<button>').appendTo(tdRead).html(status).click( function() {
                 if(status == 'unread') {
-                    status = 'read'
-                    $(this).html(status)
+                    status = 'read';
+                    $(this).html(status);
                 }
                 else {
                     status = 'unread';
-                    $(this).html(status)
+                    $(this).html(status);
                 }
 
                 that.saveBook();
@@ -80,8 +79,7 @@ class Libary {
             title = $("form").serializeArray()[0]['value'];
             author = $("form").serializeArray()[1]['value'];
             pages = $("form").serializeArray()[2]['value'];
-
-            
+             
             if($("form").serializeArray().length == 4) {
                 status = 'read' 
                 //$("form").serializeArray()[3]['value'];
