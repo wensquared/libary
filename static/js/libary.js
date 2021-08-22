@@ -33,7 +33,6 @@ class Libary {
                 {
                     text: 'Add Book',
                     click: function() {
-                        console.log('test')
                         that.addBook();
                         $(this).dialog('close');
                     }
@@ -43,12 +42,9 @@ class Libary {
     }   
 
     addBook(title = '', author = '', pages = '', status = '') {
-        console.log('u submitted')
-        // let title = $('#read').val();
-        // console.log(title)
 
         if(title && author && pages && status){
-            console.log('books avaiable to put on table')
+            // console.log('books avaiable to put on table')
             let row = $('<tr>').appendTo($('#libary'));
 
             $('<td>').appendTo(row).html(title);
@@ -77,10 +73,10 @@ class Libary {
 
         }
         else {
-            console.log('adding new book')
+            // console.log('adding new book');
+            // console.log($("form").serializeArray());
             status = 'unread';
-            console.log($("form").serializeArray());
-
+            
             title = $("form").serializeArray()[0]['value'];
             author = $("form").serializeArray()[1]['value'];
             pages = $("form").serializeArray()[2]['value'];
@@ -89,40 +85,14 @@ class Libary {
             if($("form").serializeArray().length == 4) {
                 status = 'read' 
                 //$("form").serializeArray()[3]['value'];
-                // console.log(typeof read) // string
             }
-
-            let tr = $('<tr>').appendTo('#libary')
-            $('<td>').appendTo(tr).html(title);
-            $('<td>').appendTo(tr).html(author);
-            $('<td>').appendTo(tr).html(pages);
-            let tdRead = $('<td>').appendTo(tr);
-            var that = this;
-            $('<button>').appendTo(tdRead).html(status).click( function() {
-                if(status == 'unread') {
-                    status = 'read'
-                    $(this).html(status)
-                }
-                else {
-                    status = 'unread';
-                    $(this).html(status)
-                }
-
-                that.saveBook();
-            });
-            $('<button>').html('Delete').appendTo($('<td>').appendTo(tr)).click((event) =>{                        
-                $(event.target).closest('tr').remove();
-                this.saveBook();
-            }); 
-
-            this.saveBook();
-            
             $('form').trigger('reset');
+            
+            this.addBook(title,author,pages,status);
         }
     }
 
     saveBook() {
-        console.log('savebook fn')
         let listOfBooks = [];
         let pos = 0;
 
