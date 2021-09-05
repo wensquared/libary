@@ -1,9 +1,4 @@
 'use strict'
-/* 
-    TODO:
-    - design
- */
-
 class Libary {
     constructor() {
         
