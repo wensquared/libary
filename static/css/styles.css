@@ -1,0 +1,20 @@
+h1 {
+    margin: auto;
+    text-align: center;
+}
+
+#dlg_addBook {
+   margin-top: 15px;
+   margin-left: 15px;
+}
+
+h3 {
+    margin: 15px;
+}
+
+footer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: x-small;
+}

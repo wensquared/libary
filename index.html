@@ -12,10 +12,11 @@
     <script src="./static/js/jquery-3.6.0.min.js"></script>
     <script src="./static/js/jqueryUi/jquery-ui.min.js"></script>
     <script src="./static/js/libary.js"></script>
-
+    <link rel="stylesheet" href="./static/css/styles.css">
         
 </head>
 <body>
+    <h1>Libary</h1>
     <button id="dlg_addBook">Add Book</button>
     <div id="addBookForm" title="Add Book">
         <form action="" id="form">
@@ -35,13 +36,17 @@
         </form>
     </div>
     <h3>My Libary:</h3>
-    <table id="libary">
+    <table id="libary" class="table table-striped table-hover">
         <tr>
             <th>Title:</th>
             <th>Author:</th>
             <th>Pages:</th>
             <th>Status:</th>
+            <th>  </th>
         </tr>
     </table>
+    <footer>
+        - a 'The Odin Project' project
+    </footer>
 </body>
 </html>
