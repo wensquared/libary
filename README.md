@@ -1,6 +1,4 @@
-# Libary (work in progress)
-
-## A 'The Odin Project' project
+## 'The Odin Project' - Libary
 
 Creating a libary, where user can add their own books.
 
@@ -8,10 +6,10 @@ Input fields are:
 - author
 - title
 - number of pages
-- read/unread check
+- read/unread check (button)
 
 Additional user interaction:
 - 'Remove button' for each created book
 
 Bonus:
-- make use of window.storage
+- window.Storage functionality - user's libary data is saved locally in their browser. 
